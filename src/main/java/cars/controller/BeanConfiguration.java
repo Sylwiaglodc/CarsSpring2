@@ -1,0 +1,18 @@
+package cars.controller;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import cars.beans.Cars;
+
+@Configuration
+public class BeanConfiguration {
+	
+	@Bean
+	public Cars cars() {
+		Cars bean = new Cars(1,"alfa romeo", "stevlio", 4, 2.0, false);
+		return bean;
+	}
+
+}
