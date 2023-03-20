@@ -16,7 +16,14 @@ import cars.repository.CarsRepository;
 public class CarsSpringApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
+		ApplicationContext appContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+
 		SpringApplication.run(CarsSpringApplication.class, args);
+		
+		Cars c = appContext.getBean("cars", Cars.class);
+		
+		System.out.println(c.toString());
+		((AbstractApplicationContext) appContext).close();
 		
 	
 	}
@@ -26,17 +33,22 @@ public class CarsSpringApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 		ApplicationContext appContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
-				
-				//Using an existing bean
-			Cars c = appContext.getBean("cars",Cars.class);
-			c.setMake("Alfa Romeo");
-				
-			
-				//closes the ApplicationContext resource leak - not imperative to add but nice to clean it up
-				((AbstractApplicationContext) appContext).close();
-				
-	}
+		
+		Cars c1 = new Cars(1, "AR", "gulia", 4, 4.0, true);
+		repo.save(c1);
+		
+		Cars c2 = new Cars(2, "AR", "Stelvio", 6, 2.0, true);
+		repo.save(c2);
+		
+		Cars c3 = new Cars(3, "Nissan", "GTR", 8, 4.0, true);
+		repo.save(c3);
+		
+		Cars c4 = new Cars(4, "ford", "focus", 4, 2.0, false);
+		repo.save(c4);
+		
 
+		((AbstractApplicationContext) appContext).close();
+	}
+	
 }

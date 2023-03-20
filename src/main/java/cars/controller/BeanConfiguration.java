@@ -11,7 +11,7 @@ public class BeanConfiguration {
 	
 	@Bean
 	public Cars cars() {
-		Cars bean = new Cars(1,"alfa romeo", "stevlio", 4, 2.0, false);
+		Cars bean = new Cars(5, "Nissan", "Silvia", 5, 3.0, true);
 		return bean;
 	}
 
